@@ -1,0 +1,77 @@
+﻿@model IEnumerable<VotingSystem.DAL.Data.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Candidate List";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Candidate</a>
+</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-deck">
+            @foreach (var candidate in Model)
+            {
+                var photoPath = "~/images/" + (candidate.PhotoPath ?? "user-default.png");
+                <div class="col-md-4">
+                    <div class="card m-3">
+                        <div class="card-header">
+                            <h3>@(candidate.FirstName + " " + candidate.LastName)</h3>
+                        </div>
+                        <img class="card-img-top candidate-thumbnail" src="@photoPath" asp-append-version="true" />
+                        <div class="card-footer text-center">
+                            <a asp-controller="Candidates" asp-action="Details" asp-route-id="@candidate.Id" class="btn btn-primary m-1">Details</a>
+                            <a asp-controller="Candidates" asp-action="Edit" asp-route-id="@candidate.Id" class="btn btn-primary m-1">Edit</a>
+                            <a asp-controller="Candidates" asp-action="Delete" asp-route-id="@candidate.Id" class="btn btn-danger m-1">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotoPath)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhotoPath)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
